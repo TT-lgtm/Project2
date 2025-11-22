@@ -92,7 +92,8 @@ fun taskNum2() {
     }
     if (simm)
         println("Матрица симметрична")
-    else println("Матрица несимметрична")
+    else
+        println("Матрица несимметрична")
 }
 
 fun taskNum3(){
