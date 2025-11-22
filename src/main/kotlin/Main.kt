@@ -52,7 +52,7 @@ fun taskNum1(){
         }
         println()
     }
-    val used = BooleanArray(10) //используем Boolean, т.к. неам нужно true/false
+    val used = BooleanArray(10) //используем Boolean, т.к. нам нужно true/false
     for(i in 0 until n.toInt())
     {
         for(j in 0 until m.toInt())
@@ -89,10 +89,10 @@ fun taskNum2() {
                 break
             }
         }
-        if (simm)
-            println("Матрица симметрична")
-        else println("Матрица несимметрична")
     }
+    if (simm)
+        println("Матрица симметрична")
+    else println("Матрица несимметрична")
 }
 
 fun taskNum3(){
