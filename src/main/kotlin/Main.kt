@@ -37,8 +37,7 @@ fun main() {
                 5 -> taskNum5()
             }
         } catch (e: Exception) {
-            println("Критическая ошибка в задании $taskNum: ${e.message}")
-            e.printStackTrace()
+            println("Ошибка при вводе в задание ${taskNum}!")
         }
         var exitConfirmed = false
         while (!exitConfirmed)
@@ -93,17 +92,16 @@ fun taskNum1(){
         }
         println()
     }
-    val used = BooleanArray(10) //используем bool, т.к. нам нужно true/false
+    val used = BooleanArray(10)
     for(i in 0 until n.toInt())
     {
         for(j in 0 until m.toInt())
         {
             val s=mas[i][j].toString()
-            for (ch in s) used[ch-'0']=true //(ch in s) перебирает строку s по одному символу ch и переводит символьную цифру ch в числовое значение, из char в int
+            for (ch in s) used[ch-'0']=true
         }
     }
     var count=0
-    //пройтись по всем элементам массива used, для каждого элемента b - если b==true, то увеличить count на 1
     for (b in used)
     {
         if (b)
@@ -152,29 +150,24 @@ fun taskNum3(){
         6,16,15,11,26,5,30,27,8,18,10,33,31,32,19,7,17)
 
     val map = alphabet.zip(numbers).toMap()
-    //.zip берёт два списка одинаковой длины и связывает их попарно, т.е. А=21, Б=13 и т.д.
-    //.toMap() превращает список пар в словарь, т.е теперь вводя map['П'] можем узнать ее число
     val reverseMap = numbers.zip(alphabet).toMap()
 
     print("Введите текст: ")
     val text = readLine()!!.uppercase()
-    //!!- гарантирует, что здесь НЕ null и просит использовать значение
-    //.uppercase() преобразует строку в верхний регистр, все буквы становятся заглавными
     print("Введите ключевое слово: ")
     val key = readLine()!!.uppercase()
     print("Зашифровать (1) или расшифровать (2): ")
     val mode = readLine()!!.toInt()
 
     var result = "";
-    for (i in text.indices) { //индексы это например "Hello" - индексы 0...4. Т.е. диапазон допустимых индексов строки
+    for (i in text.indices) {
         val letter = text[i]
-        if (letter !in map.keys) { //map.keys это все символы в словаре map, т.е. все наши буквы
-            //Если буквы нет в словаре
+        if (letter !in map.keys) {
             result += letter
             continue
         }
-        val letterNum = map[letter]!! //ищет число, которое соответствует букве, не null
-        val keyLetter = key[i % key.length] //берёт остаток от деления, чтобы ключ повторялся по кругу
+        val letterNum = map[letter]!!
+        val keyLetter = key[i % key.length]
         val keyNum = map[keyLetter]!!
 
         val shift =
@@ -194,16 +187,11 @@ fun taskNum3(){
 fun taskNum4(){
     println("Введите элементы первого массива через пробел:")
     val arr1 = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }.toMutableList()
-    //.trim() Убирает пробелы в начале и конце строки
-    //.split(Regex("\\s+")) разбивает строку на части по любому количеству пробелов
-    //\\s+ означает один или более пробелов
-    //.map { it.toInt() } каждый элемент в словаре превращается из строки в число
-    //.toMutableList() создаёт изменяемый список, чтобы можно было удалять элементы
     println("Введите элементы второго массива через пробел:")
     val arr2 = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
 
     val list1 = arr1.toMutableList()
-    val result = mutableListOf<Int>() //изменяемый список целых чисел
+    val result = mutableListOf<Int>()
 
     for (num in arr2) {
         if (num in list1) {
@@ -217,14 +205,10 @@ fun taskNum4(){
 fun taskNum5(){
     println("Введите слова через пробел:")
     val words = readLine()!!.trim().split(Regex("\\s+")).toTypedArray()
-        //.toTypedArray() преобразует список в массив
     val groups = mutableMapOf<String, MutableList<String>>()
 
     for (word in words) {
         val key = word.toCharArray().sorted().joinToString("")
-        //word.toCharArray() преобразует слово в массив букв
-        //.sorted() сортирует буквы по алфавиту
-        //.joinToString("") склеивает отсортированные буквы обратно в строку
         if (key !in groups)
             groups[key] = mutableListOf()
         groups[key]!!.add(word)
