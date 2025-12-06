@@ -2,8 +2,8 @@ import com.sun.jdi.connect.Connector.StringArgument
 import java.lang.Exception
 fun main() {
     var exitProgram = true
-    while (exitProgram) {
-        // Выбор задания с валидацией
+    while (exitProgram)
+    {
         var taskNum: Int? = null
         while (taskNum == null)
         {
@@ -24,7 +24,7 @@ fun main() {
                 {
                     println("Ошибка: номер задания должен быть от 1 до 5")
                 }
-            } catch (e: NumberFormatException) {
+            } catch (e: Exception) {
                 println("Ошибка: введено не число. Требуется целое число от 1 до 5")
             }
         }
