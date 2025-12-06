@@ -1,28 +1,61 @@
 import com.sun.jdi.connect.Connector.StringArgument
-fun main(args: Array<String>) {
+import java.lang.Exception
+fun main() {
     var exitProgram = true
-    do {
-        print("Выберите номер задания для запуска (всего заданий 5 (1-5)): ")
-        val inputTask = readln()
-        val taskNum = inputTask.toInt()
-        when (taskNum){
-            1 -> taskNum1()
-            2 -> taskNum2()
-            3 -> taskNum3()
-            4 -> taskNum4()
-            5 -> taskNum5()
-            else -> break
+    while (exitProgram) {
+        // Выбор задания с валидацией
+        var taskNum: Int? = null
+        while (taskNum == null) {
+            print("Выберите номер задания для запуска (1-5): ")
+            val inputTask = readln().trim()
+
+            if (inputTask.isEmpty()) {
+                println("Ошибка: ввод не может быть пустым")
+                continue
+            }
+            try {
+                val num = inputTask.toInt()
+                if (num in 1..5) {
+                    taskNum = num
+                } else {
+                    println("Ошибка: номер задания должен быть от 1 до 5")
+                }
+            } catch (e: NumberFormatException) {
+                println("Ошибка: введено не число. Требуется целое число от 1 до 5")
+            }
         }
-        println("Хотите завершить работу программы?")
-        val inputExit = readln()
-        if(inputExit=="Да" || inputExit=="да" || inputExit=="Yes" || inputExit=="yes") {
-            exitProgram = false
+        try {
+            when (taskNum) {
+                1 -> taskNum1()
+                2 -> taskNum2()
+                3 -> taskNum3()
+                4 -> taskNum4()
+                5 -> taskNum5()
+            }
+        } catch (e: Exception) {
+            println("Критическая ошибка в задании $taskNum: ${e.message}")
+            e.printStackTrace()
         }
-        else {
-            println("----------------------------------------")
+        var exitConfirmed = false
+        while (!exitConfirmed) {
+            print("Хотите завершить работу программы? (Да/Нет): ")
+            val inputExit = readln().trim().lowercase()
+            when {
+                inputExit in listOf("да", "yes", "д", "y") -> {
+                    exitProgram = false
+                    exitConfirmed = true
+                }
+                inputExit in listOf("нет", "no", "н", "n") -> {
+                    println("----------------------------------------")
+                    exitConfirmed = true
+                }
+                else -> println("Ошибка: введите 'Да' или 'Нет'")
+            }
         }
-    } while (exitProgram)
+    }
+    println("Программа завершена")
 }
+
 fun taskNum1(){
     print("Введите количество строк в массиве: ")
     val n = readln()
@@ -89,6 +122,13 @@ fun taskNum2() {
                 break
             }
         }
+    }
+    for (i in 0 until n){
+        for (j in 0 until m){
+            print(mas[i][j])
+            print(" ")
+        }
+        println()
     }
     if (simm)
         println("Матрица симметрична")
