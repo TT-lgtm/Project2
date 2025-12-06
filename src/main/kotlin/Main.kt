@@ -5,11 +5,13 @@ fun main() {
     while (exitProgram) {
         // Выбор задания с валидацией
         var taskNum: Int? = null
-        while (taskNum == null) {
+        while (taskNum == null)
+        {
             print("Выберите номер задания для запуска (1-5): ")
             val inputTask = readln().trim()
 
-            if (inputTask.isEmpty()) {
+            if (inputTask.isEmpty())
+            {
                 println("Ошибка: ввод не может быть пустым")
                 continue
             }
@@ -17,7 +19,9 @@ fun main() {
                 val num = inputTask.toInt()
                 if (num in 1..5) {
                     taskNum = num
-                } else {
+                }
+                else
+                {
                     println("Ошибка: номер задания должен быть от 1 до 5")
                 }
             } catch (e: NumberFormatException) {
@@ -37,15 +41,19 @@ fun main() {
             e.printStackTrace()
         }
         var exitConfirmed = false
-        while (!exitConfirmed) {
+        while (!exitConfirmed)
+        {
             print("Хотите завершить работу программы? (Да/Нет): ")
             val inputExit = readln().trim().lowercase()
-            when {
-                inputExit in listOf("да", "yes", "д", "y") -> {
+            when
+            {
+                inputExit in listOf("да", "yes", "д", "y") ->
+                {
                     exitProgram = false
                     exitConfirmed = true
                 }
-                inputExit in listOf("нет", "no", "н", "n") -> {
+                inputExit in listOf("нет", "no", "н", "n") ->
+                {
                     println("----------------------------------------")
                     exitConfirmed = true
                 }
