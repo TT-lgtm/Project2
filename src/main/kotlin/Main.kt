@@ -98,7 +98,9 @@ fun taskNum1(){
         for(j in 0 until m.toInt())
         {
             val s=mas[i][j].toString()
-            for (ch in s) used[ch-'0']=true
+            for (ch in s) {
+                used[ch - '0'] = true
+            }
         }
     }
     var count=0
@@ -172,9 +174,9 @@ fun taskNum3(){
 
         val shift =
             if (mode == 1)
-            letterNum + keyNum
-        else
-            letterNum - keyNum
+                letterNum + keyNum
+            else
+                letterNum - keyNum
 
         val newNum = ((shift - 1) % 33 + 33) % 33 + 1
         result += reverseMap[newNum]
